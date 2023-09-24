@@ -1,0 +1,44 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+<h1>{{ category_req }}</h1>
+<hr>
+<div class="category-page">
+    <div class="left-container">
+        <div class="sub-section">
+            <h3>Subsection 1</h3>
+            <p>Content for Subsection 1 goes here...</p>
+        </div>
+        <div class="sub-section">
+            <h3>Subsection 2</h3>
+            <p>Content for Subsection 2 goes here...</p>
+        </div>
+    </div>
+    <div class="right-container">
+        {% for category_obj in category %}
+        <a href="{% url 'listing' pk=category_obj.pk %}" class="card-link" style=" margin-left: 0; display: block; height: 100%; text-decoration: none; border:none">
+            <div class="card " style="max-width: 840px; border:none ">
+                <div class="row g-0">
+                    <div class="col-md-4 box" style="padding-right: 2px;">
+                        <img src="{% if category_obj.thumbnail %}{{ category_obj.thumbnail.url }}{% endif %}" class="img-fluid rounded-start" style="border-radius: 6px;" alt="...">
+                    </div>
+                    <div class="col-md-8" style="padding-left:2px">
+                        <div class="card-body">
+                            <h6 class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 10px;">Starts from <span style="font-size: 18px;">${{ category_obj.starting_bid }} </span></span> 
+                            </h6>
+                            <h6 class="card-title ellipsis">{{ category_obj.title }}</h6>
+                            <p class="card-text ellipsis">{{ category_obj.description }}</p>
+                            <p class="card-text-small">Listed&nbsp;{{ category_obj.date_posted }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        {% endfor %}
+    </div>    
+</div>
+  
+{% endblock %}

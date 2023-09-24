@@ -1,0 +1,100 @@
+{% extends "auctions/layout.html" %}
+{% load static %}
+
+{% block body %}
+
+    <!--
+    <div class="row">
+        {% for listing in listings %}
+            <div class="col-md-4 mb-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="{% if listing.thumbnail %}{{ listing.thumbnail.url }}{% endif %}" class="card-img-top" alt="Error404">
+                    <div class="card-body"> 
+                        <h5><a href="{% url 'listing' pk=listing.pk %}" class="card-title">{{ listing.title }}</a></h5>
+                        <p class="card-text">{{ listing.description }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Category: {{ listing.auction_category }}</li>
+                        <li class="list-group-item">Starting Bid: {{ listing.starting_bid }}</li>
+                    </ul>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+-->
+    <h1>Active Auctions</h1>
+    <br>
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; ">
+        <h4 style=" margin-left: 65px;  " >Vehicles</h4>
+        <a href="{% url 'category' category_req='Vehicles' %}" style="text-decoration: none; display: inline-flex; align-items: center;">
+            <span style="margin-right: 65px;">
+                <h7>View More</h7>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" style="margin-bottom: 5px;" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </span>
+        </a>
+    </div>
+
+    <div style="display: flex; justify-content: center; align-items: center; ">
+        <div class="card-group" style="width: 90vw; ">
+            {% for vehicle in vehicles %}
+                <div class="card" style="padding: 10px; border: none;">
+                    <div style="cursor: pointer;" onclick="redirectToListing('{{ vehicle.pk }}')">
+                        <div class="box">
+                            <img src="{% if vehicle.thumbnail %}{{ vehicle.thumbnail.url }}{% endif %}" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 10px;">Starts from <span style="font-size: 18px;">${{ vehicle.starting_bid }} </span></span> 
+                            </h6>
+                            <h6 class="card-title ellipsis">{{ vehicle.title }}</h6>
+                            <p class="card-text ellipsis">{{ vehicle.description }}</p>
+                            <p class="card-text-small">Listed&nbsp;{{ vehicle.date_posted }}</p>
+                        </div>                       
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <br><br>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; ">
+        <h4 style=" margin-left: 65px;" > Mobile Phones</h4>
+        <a href="{% url 'category' category_req='Mobile Phones' %}" style="text-decoration: none; display: inline-flex; align-items: center;">
+            <span style="margin-right: 65px;">
+                <h7>View More</h7>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" style="margin-bottom: 5px;" viewBox="0 0 16 16">
+                    <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+                </svg>
+            </span>
+        </a>
+    </div>
+    
+    <div style="display: flex; justify-content: center; align-items: center; ">
+        <div class="card-group" style="width: 90vw; ">
+            {% for mobile in mobiles %}
+                <div class="card" style="padding: 10px; border: none;">
+                    <div style="cursor: pointer;" onclick="redirectToListing('{{ mobile.pk }}')">
+                        <div class="box">
+                            <img src="{% if mobile.thumbnail %}{{ mobile.thumbnail.url }}{% endif %}" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h6 class="card-title" style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 10px;">Starts from <span style="font-size: 18px;">${{ mobile.starting_bid }} </span></span> 
+                            </h6>
+                            <h6 class="card-title ellipsis">{{ mobile.title }}</h6>
+                            <p class="card-text ellipsis">{{ mobile.description }}</p>
+                            <p class="card-text-small">Listed&nbsp;{{ mobile.date_posted }}</p>
+                        </div>  
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    
+    
+{% endblock %}

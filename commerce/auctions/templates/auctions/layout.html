@@ -1,0 +1,301 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
+      crossorigin="anonymous"
+        />
+        <title>{% block title %}BidBay{% endblock %}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.16.0/font/bootstrap-icons.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'auctions/styles.css' %}" rel="stylesheet">
+    </head>
+    <body>  
+        <nav class="navbar navbar-expand-lg bg-body-tertiary " style="background-color:white; ">
+            <div class="container-fluid ">
+                <a class="navbar-brand" href="{% url 'index' %}">
+                    <img src="{% static 'auctions/assets/logo.png' %}" alt="Logo" width="260"  class="">
+                </a>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'add_listing' %}">Add Auction</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'view_wishlist' %}">Watchlist</a>
+                  </li>
+                </ul>
+                <span class="navbar-text">
+                        Contact: +911-22-412
+                </span>
+            </div>
+        </nav>
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #1b5373; padding: 0; height: 65px;">
+            <div class="container-fluid d-flex justify-content-between " >
+
+                <div class="nav-item dropdown d-flex col-lg-2" style="background-color: #6b91a2; display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100%; ">
+                    <a class="nav-link dropdown-toggle " style="color: black; font-size: 1.1rem;" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+                              </svg>
+                        Categories
+                    </a>
+                    <ul class="dropdown-menu" style="width: 50vw; height: 60vh; ">
+                      <div class="container text-left" style="font-weight: bold;">
+                        <div class="row row-cols-3" >
+                          <div class="col p-4"><a href="{% url 'category' category_req='Fashion' %}" style="color: black">Fashion</a></div>
+                          <div class="col p-4"><a href="{% url 'category' category_req='Toys & Games' %}" style="color: black">Toys & Games</a></div>
+                          <div class="col p-4"><a href="{% url 'category' category_req='Electronics' %}" style="color: black">Electronics</a></div>
+                          <div class="col p-4"><a href="{% url 'category' category_req='Mobile Phones' %}" style="color: black">Mobile Phones</a></div>
+                          <div class="col p-4"><a href="{% url 'category' category_req='Home' %}" style="color: black">Home</a></div>
+                          <div class="col p-4"><a href="{% url 'category' category_req='Sports & Outdoor' %}" style="color: black">Sports & Outdoor</a></div>
+                          <div class="col p-4"><a href="{% url 'category' category_req='Vehicles' %}" style="color: black">Vehicles</a></div>
+                          <div class="col p-4"><a href="{% url 'category' category_req='Beauty' %}" style="color: black">Beauty</a></div>
+                          <div class="col p-4"><a href="{% url 'category' category_req='Furniture' %}" style="color: black">Furniture</a></div>
+                          <div class="col p-4"><a href="{% url 'category' category_req='Jewelry & Watches' %}" style="color: black">Jewelry & Watches</a></div>
+                          <div class="col p-4"><a href="{% url 'category' category_req='Collectibles & Art' %}" style="color: black">Collectibles & Art</a></div>
+                          <div class="col p-4"><a href="{% url 'category' category_req='Music & Musical Instuments' %}" style="color: black">Music & Musical Instruments</a></div>
+                        </div>
+                      </div>
+                    </ul>
+                </div>
+                
+                
+                <form class="d-flex col-lg-7" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Find Cars, Mobile Phones and more...     " aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit" style=" margin-left: 15px;">Search</button>
+                </form>
+                
+
+                <div class="action" >
+                  <div class="profile" onclick="menuToggle();">
+                    <img src="{% static 'auctions/assets/avatar.jpg' %}" />
+                  </div>
+                  <div class="menu" >
+                    <h3>Someone Famous<br /><span>Website Designer</span></h3>
+                    <ul>
+                      <li>
+                        <img src="{% static 'auctions/assets/icons/user.png' %}" /><a href="#">My profile</a>
+                      </li>
+                      <li>
+                        <img src="{% static 'auctions/assets/icons/edit.png' %}" /><a href="#">Edit profile</a>
+                      </li>
+                      <li>
+                        <img src="{% static 'auctions/assets/icons/envelope.png' %}" /><a href="#">Inbox</a>
+                      </li>
+                      <li>
+                        <img src="{% static 'auctions/assets/icons/settings.png' %}" /><a href="#">Setting</a>
+                      </li>
+                      <li><img src="{% static 'auctions/assets/icons/question.png' %}" /><a href="#">Help</a></li>
+                      <li>
+                        <img src="{% static 'auctions/assets/icons/log-out.png' %}" /><a href="#">Logout</a>
+                      </li>
+                    </ul>
+                  </div>
+              </div>
+      
+
+              <span class="navbar-text" >
+                    {% if user.is_authenticated %}
+                       <strong>{{ user.username }}</strong> 
+                    {% endif %}
+              </span>
+
+                
+                
+                {% if user.is_authenticated %}
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+                        </li>
+                    </ul>
+                {% else %}
+                    
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Log In</a>
+                        </li>
+                    </ul>
+                    or
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+                    </ul>
+                {% endif %}
+
+              
+
+            </div>
+        </nav>
+        <hr>
+
+        {% block body %}
+        {% endblock %}
+
+        <!-- Footer -->
+        <footer class="text-center text-lg-start text-muted mt-3" style="background-color: #1b5373;">
+          <!-- Section: Links  -->
+          <section class="">
+            <div class="container text-center text-md-start pt-4 pb-4">
+              <!-- Grid row -->
+              <div class="row mt-3">
+                <!-- Grid column -->
+                <div class="col-12 col-lg-3 col-sm-12 mb-2">
+                  <!-- Content -->
+                  <div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                    <div class="navbar-brand" style=" display: flex; align-items: center; justify-content: center; background-color: white; width: 220px; height: 60px; padding: 0; margin: 0; object-fit: cover;">
+                      <img src="{% static 'auctions/assets/logo.png' %}" alt="Logo" width="260" >
+                    </div>
+                    <p class="mt-1 text-white">
+                      © 2023 Copyright: BidBay.com
+                    </p>
+                  </div>
+                </div>
+                <!-- Grid column -->
+        
+                <!-- Grid column -->
+                <div class="col-6 col-sm-4 col-lg-2">
+                  <!-- Links -->
+                  <h6 class="text-uppercase text-white fw-bold mb-2">
+                    Store
+                  </h6>
+                  <ul class="list-unstyled mb-4">
+                    <li><a class="text-white-50" href="#">About us</a></li>
+                    <li><a class="text-white-50" href="#">Find store</a></li>
+                    <li><a class="text-white-50" href="#">Categories</a></li>
+                    <li><a class="text-white-50" href="#">Blogs</a></li>
+                  </ul>
+                </div>
+                <!-- Grid column -->
+        
+                <!-- Grid column -->
+                <div class="col-6 col-sm-4 col-lg-2">
+                  <!-- Links -->
+                  <h6 class="text-uppercase text-white fw-bold mb-2">
+                    Information
+                  </h6>
+                  <ul class="list-unstyled mb-4">
+                    <li><a class="text-white-50" href="#">Help center</a></li>
+                    <li><a class="text-white-50" href="#">Money refund</a></li>
+                    <li><a class="text-white-50" href="#">Shipping info</a></li>
+                    <li><a class="text-white-50" href="#">Refunds</a></li>
+                  </ul>
+                </div>
+                <!-- Grid column -->
+        
+                <!-- Grid column -->
+                <div class="col-6 col-sm-4 col-lg-2">
+                  <!-- Links -->
+                  <h6 class="text-uppercase text-white fw-bold mb-2">
+                    Support
+                  </h6>
+                  <ul class="list-unstyled mb-4">
+                    <li><a class="text-white-50" href="#">Help center</a></li>
+                    <li><a class="text-white-50" href="#">Documents</a></li>
+                    <li><a class="text-white-50" href="#">Account restore</a></li>
+                    <li><a class="text-white-50" href="#">My orders</a></li>
+                  </ul>
+                </div>
+                <!-- Grid column -->
+        
+                <!-- Grid column -->
+                <div class="col-12 col-sm-12 col-lg-3">
+                  <!-- Links -->
+                  <h6 class="text-uppercase text-white fw-bold mb-2">Newsletter</h6>
+                  <p class="text-white">Stay in touch with latest updates about our products and offers</p>
+                  <div class="input-group mb-3">
+                    <input type="email" class="form-control border" placeholder="Email" aria-label="Email" aria-describedby="button-addon2" />
+                    <button class="btn btn-light border shadow-0" type="button" id="button-addon2" data-mdb-ripple-color="dark">
+                      Join
+                    </button>
+                  </div>
+                </div>
+                <!-- Grid column -->
+              </div>
+              <!-- Grid row -->
+            </div>
+          </section>
+          <!-- Section: Links  -->
+        
+          <div class="">
+            <div class="container">
+              <div class="d-flex justify-content-between py-4 border-top">
+                <!--- payment --->
+                <div>
+                  <i class="fab fa-lg fa-cc-visa text-white"></i>
+                  <i class="fab fa-lg fa-cc-amex text-white"></i>
+                  <i class="fab fa-lg fa-cc-mastercard text-white"></i>
+                  <i class="fab fa-lg fa-cc-paypal text-white"></i>
+                </div>
+                <!--- payment --->
+        
+                <!--- language selector --->
+                <div class="dropdown dropup">
+                  <a class="dropdown-toggle text-white" href="#" id="Dropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false"> <i class="flag-united-kingdom flag m-0 me-1"></i>English </a>
+        
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="Dropdown">
+                    <li>
+                      <a class="dropdown-item" href="#"><i class="flag-united-kingdom flag"></i>English <i class="fa fa-check text-success ms-2"></i></a>
+                    </li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li>
+                      <a class="dropdown-item" href="#"><i class="flag-poland flag"></i>Polski</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#"><i class="flag-china flag"></i>中文</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#"><i class="flag-japan flag"></i>日本語</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#"><i class="flag-germany flag"></i>Deutsch</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#"><i class="flag-france flag"></i>Français</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#"><i class="flag-spain flag"></i>Español</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#"><i class="flag-russia flag"></i>Русский</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#"><i class="flag-portugal flag"></i>Português</a>
+                    </li>
+                  </ul>
+                </div>
+                <!--- language selector --->
+              </div>
+            </div>
+          </div>
+        </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>  
+  <script>
+      function menuToggle() {
+        const toggleMenu = document.querySelector(".menu");
+        toggleMenu.classList.toggle("active");
+      }
+
+      function heartFill(){
+        const heart = documents.querySelector()
+      }
+
+      
+      function redirectToListing(pk) {
+          window.location.href = `/listing/${pk}`;
+      }
+
+  </script>
+  </body>
+</html>
